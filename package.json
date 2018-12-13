@@ -1,0 +1,25 @@
+{
+  "name": "@jerry521/j-fetch",
+  "version": "1.0.7",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel ./src  --out-dir ./lib",
+    "prepublish": "npm run build"
+  },
+  "repository":"https://github.com/xusai2014/J-fetch",
+  "author": "jerryxu",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.2.0",
+    "@babel/core": "^7.2.0",
+    "@babel/node": "^7.2.0",
+    "@babel/plugin-proposal-class-properties": "^7.2.1",
+    "@babel/preset-env": "^7.2.0"
+  },
+  "dependencies": {
+    "abortcontroller-polyfill": "^1.2.1",
+    "whatwg-fetch": "^3.0.0"
+  }
+}
