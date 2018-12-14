@@ -19,11 +19,14 @@ import jFetch from '@jerry521/j-fetch';
     'Custoum-x':'token'
   },
   // 非必配置项 
-  beforeSend:(data)=>{
+  beforeSend:(data,headers)=>{
     // 回调统一处理组装参数，它是JSON字符串
     const obj =JSON.parse(data);
     Object.defineProperty(obj,'version',{ value:'1.0.0'})
-    return JSON.stringify(obj);
+    return {
+      data:JSON.stringify(obj),
+      headers
+    };
     
   },
   // 非必配置项，默认 200-300 或者 400 是网络成功，其余按网络异常处理，可覆盖

@@ -34,7 +34,7 @@ export default class jFetch {
     'Content-Type':'application/json;charset=UTF-8'
   }
 
-  beforeSendFunc = (data) => data
+  beforeSendFunc = (data,headers) => ({data,headers})
 
   requestQuene = []
 
@@ -95,7 +95,12 @@ export default class jFetch {
       signal: controller.signal
     }
     if (data) {
-      options.body = this.beforeSendFunc(JSON.stringify(data));
+      const { data, headers = {}}= this.beforeSendFunc(JSON.stringify(data));
+      options.body = data;
+      options.headers = {
+        ...options.headers,
+        ...headers,
+      }
     }
     this.requestQuene.push(controller);
     return new Promise((resolve, reject) => {
