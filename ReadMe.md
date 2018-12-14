@@ -31,7 +31,7 @@ import jFetch from '@jerry521/j-fetch';
     // TODO HTTP STATUS
   },
   // 非必配置项
-  handleBody:(data)=>{
+  handleData:(data)=>{
     // TODO 处理data，得到result，例如解密报文、根据返回业务编码抛出异常
     
     return result
@@ -50,8 +50,10 @@ import jFetch from '@jerry521/j-fetch';
 })
 
 // 请求示例
-fetchInstace.get('/users').then(()=>{},()=>{}).catch(()=>{})
-fetchInstace.post('/user',{ name:'jerry', gender:'0'}).then(()=>{},()=>{}).catch(()=>{})
+fetchInstace.get('/users').then(()=>{},()=>{})
+.catch(()=>{})
+fetchInstace.post('/user',{ name:'jerry', gender:'0'})
+.then(()=>{},()=>{}).catch(()=>{})
 
 // 卸载网络请求
 
@@ -71,7 +73,7 @@ var data = new FormData()
 data.append('file', input.files[0])
 data.append('user', 'hubot')
 
-fetch('/avatars', {
+fetchInstace('/avatars', {
   method: 'POST',
   body: data
 })
