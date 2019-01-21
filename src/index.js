@@ -100,8 +100,8 @@ export default class jFetch {
       signal: controller.signal
     }
     if (data) {
-      const { data, headers = {},mode = 'cors'}= await this.beforeSendFunc(JSON.stringify(data));
-      options.body = data;
+      const { data:bodyData, headers = {},mode = 'cors'}= await this.beforeSendFunc(JSON.stringify(data));
+      options.body = bodyData;
       options.headers = {
         ...options.headers,
         ...headers,
