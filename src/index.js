@@ -39,7 +39,7 @@ export default class jFetch {
     'Content-Type':'application/json;charset=UTF-8'
   }
 
-  beforeSendFunc = (data,headers) => ({data,headers})
+  beforeSendFunc = async (data,headers) => ({data,headers})
 
   requestQuene = []
 
@@ -92,7 +92,7 @@ export default class jFetch {
     this.requestQuene.map((v, k) => v.abort());
   }
 
-  common(path, data, method) {
+  async common(path, data, method) {
     const controller = new AbortController()
     let options = {
       method: method,
@@ -100,7 +100,7 @@ export default class jFetch {
       signal: controller.signal
     }
     if (data) {
-      const { data, headers = {},mode = 'cors'}= this.beforeSendFunc(JSON.stringify(data));
+      const { data, headers = {},mode = 'cors'}= await this.beforeSendFunc(JSON.stringify(data));
       options.body = data;
       options.headers = {
         ...options.headers,
