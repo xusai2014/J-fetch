@@ -14,12 +14,15 @@ export default class jFetch {
       handleData,
       success,  //priority 最高
       failed,
+      mode
     } = options;
 
     this.headers = {
       ...this.headers,
       ...headers
     };
+
+    this.mode = mode;
 
     this.baseUrl = baseUrl;
     if (checkStatus) this.checkStatus = checkStatus;
@@ -28,6 +31,8 @@ export default class jFetch {
     if (failed) this.failedFunc = failed;
     if (beforeSend) this.beforeSendFunc = beforeSend;
   }
+
+  mode = 'cors';
 
   baseUrl = '/'
   headers = {
@@ -95,12 +100,13 @@ export default class jFetch {
       signal: controller.signal
     }
     if (data) {
-      const { data, headers = {}}= this.beforeSendFunc(JSON.stringify(data));
+      const { data, headers = {},mode = 'cors'}= this.beforeSendFunc(JSON.stringify(data));
       options.body = data;
       options.headers = {
         ...options.headers,
         ...headers,
       }
+      options.mode = this.mode;
     }
     this.requestQuene.push(controller);
     return new Promise((resolve, reject) => {
